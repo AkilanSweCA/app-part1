@@ -1,5 +1,5 @@
 import * as express from "express";
-import { fetchAdditionalInfo, updatehomeowner } from "../services";
+import { fetchadditionalinfo, updatehomeowner } from "../services";
 import {
   globalConstant,
   parseHomeownerRequest,
@@ -18,7 +18,7 @@ export const updateHomeowner = async (
     return res.sendStatus(StatusCodes.BadRequest);
   }
 
-  const additionalInfo = await fetchAdditionalInfo(obj);
+  const additionalInfo = await fetchadditionalinfo(obj);
   const resp = await updatehomeowner({ ...obj, ...additionalInfo });
 
   return resp == null

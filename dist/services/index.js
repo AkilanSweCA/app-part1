@@ -19,4 +19,4 @@ __exportStar(require("./getcoordinates"), exports);
 __exportStar(require("./deletehomeowner"), exports);
 __exportStar(require("./updatehomeowner"), exports);
 __exportStar(require("./gethomeowner"), exports);
-__exportStar(require("./fetchAdditionalInfo"), exports);
+__exportStar(require("./fetchadditionalinfo"), exports);

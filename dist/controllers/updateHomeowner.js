@@ -19,7 +19,7 @@ const updateHomeowner = (req, res) => __awaiter(void 0, void 0, void 0, function
     if (!obj._id || !(0, utils_1.validateHomeownerUpdateReq)(obj)) {
         return res.sendStatus(StatusCodes_1.StatusCodes.BadRequest);
     }
-    const additionalInfo = yield (0, services_1.fetchAdditionalInfo)(obj);
+    const additionalInfo = yield (0, services_1.fetchadditionalinfo)(obj);
     const resp = yield (0, services_1.updatehomeowner)(Object.assign(Object.assign({}, obj), additionalInfo));
     return resp == null
         ? res.status(StatusCodes_1.StatusCodes.OK).json(resp)

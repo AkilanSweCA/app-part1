@@ -19,7 +19,7 @@ const addHomeowner = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     if ((0, utils_1.validateHomeownerCreateReq)(obj)) {
         return res.sendStatus(400);
     }
-    const additionalInfo = yield (0, services_1.fetchAdditionalInfo)(obj);
+    const additionalInfo = yield (0, services_1.fetchadditionalinfo)(obj);
     const resp = yield (0, services_1.addhomeowner)(Object.assign(Object.assign({}, obj), additionalInfo));
     return resp
         ? res.status(StatusCodes_1.StatusCodes.Created).json(resp)
