@@ -1,5 +1,5 @@
 import * as express from "express";
-import { addhomeowner, fetchadditionalinfo } from "../services";
+import { createhomeowner, fetchadditionalinfo } from "../services";
 import {
   globalConstant,
   parseHomeownerRequest,
@@ -7,7 +7,7 @@ import {
 } from "../utils";
 import { StatusCodes } from "../enum/StatusCodes";
 
-export const addHomeowner = async (
+export const createHomeowner = async (
   req: express.Request,
   res: express.Response
 ) => {
@@ -19,7 +19,7 @@ export const addHomeowner = async (
   }
 
   const additionalInfo = await fetchadditionalinfo(obj);
-  const resp = await addhomeowner({ ...obj, ...additionalInfo });
+  const resp = await createhomeowner({ ...obj, ...additionalInfo });
 
   return resp
     ? res.status(StatusCodes.Created).json(resp)

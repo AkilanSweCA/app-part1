@@ -1,6 +1,6 @@
 import * as express from "express";
 import {
-  addHomeowner,
+  createHomeowner,
   getHomeownerById,
   getHomeowners,
   searchHomeowners,
@@ -12,7 +12,7 @@ import { asyncWrapper } from "../helpers/asyncWrapper";
 const router = express.Router();
 
 // POST /homeowners
-router.post("/api/homeowner", asyncWrapper(addHomeowner));
+router.post("/api/homeowner", asyncWrapper(createHomeowner));
 
 // GET /homeowners
 router.get("/api/homeowners", asyncWrapper(getHomeowners));

@@ -1,4 +1,4 @@
-export interface IAddHomeownerRequest {
+export interface ICreateHomeownerRequest {
   _id?: string;
   fname: string;
   lname: string;

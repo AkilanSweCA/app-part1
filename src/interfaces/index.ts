@@ -1,3 +1,3 @@
-export * from "./IAddHomeownerRequest";
-export * from "./IAddHomeownerResponse";
+export * from "./ICreateHomeownerRequest";
+export * from "./ICreateHomeownerResponse";
 export * from "./IHomeowner";

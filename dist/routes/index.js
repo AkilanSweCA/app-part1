@@ -28,7 +28,7 @@ const controllers_1 = require("../controllers");
 const asyncWrapper_1 = require("../helpers/asyncWrapper");
 const router = express.Router();
 // POST /homeowners
-router.post("/api/homeowner", (0, asyncWrapper_1.asyncWrapper)(controllers_1.addHomeowner));
+router.post("/api/homeowner", (0, asyncWrapper_1.asyncWrapper)(controllers_1.createHomeowner));
 // GET /homeowners
 router.get("/api/homeowners", (0, asyncWrapper_1.asyncWrapper)(controllers_1.getHomeowners));
 // GET /homeowners/:id
