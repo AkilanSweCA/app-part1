@@ -1,7 +1,7 @@
 {
-  "name": "app-services-part1",
+  "name": "mcap-micorservice-homeowner-app",
   "version": "0.0.0",
-  "description": "app-services-part1",
+  "description": "mcap-micorservice-homeowner-app",
   "main": "src/app.ts",
   "author": {
     "name": "Akilan"
