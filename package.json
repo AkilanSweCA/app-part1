@@ -1,0 +1,42 @@
+{
+  "name": "app-services-part1",
+  "version": "0.0.0",
+  "description": "app-services-part1",
+  "main": "src/app.ts",
+  "author": {
+    "name": "Akilan"
+  },
+  "scripts": {
+    "dev": "nodemon src/app.ts",
+    "test": "set PORT=0&&jest --forceExit --detectOpenHandles  --runInBand  --testTimeout=10000 --no-cache --watchAll"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^14.14.7",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "eslint": "^8.21.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.5.2"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.17.1",
+    "express-xml-bodyparser": "^0.3.0",
+    "mongoose": "^8.2.1"
+  }
+}
