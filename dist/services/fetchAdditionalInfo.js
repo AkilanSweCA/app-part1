@@ -9,22 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getcoordinates = void 0;
-require("dotenv").config();
-// Define the geocodeService function
-const getcoordinates = function getCoordinates(address) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            // Extract coordinates from the response
-            // Make a request to the geocoding API
-            const response = yield fetch(`${process.env.GEO_API}&q=${encodeURIComponent(address)}`);
-            const resp = yield response.json();
-            // Return the coordinates
-            return resp.length > 0 ? [resp[0].lat, resp[0].lon] : undefined;
-        }
-        catch (e) {
-            throw e;
-        }
-    });
-};
-exports.getcoordinates = getcoordinates;
+exports.fetchAdditionalInfo = void 0;
+const calculateAge_1 = require("../utils/calculateAge");
+const getcoordinates_1 = require("./getcoordinates");
+const fetchAdditionalInfo = ({ dob, address }) => __awaiter(void 0, void 0, void 0, function* () {
+    // calculate age
+    const age = dob && !isNaN(new Date(dob).getTime()) && (0, calculateAge_1.calculateAge)(dob);
+    // retrieve geocoordinates
+    const coordinates = address && (yield (0, getcoordinates_1.getcoordinates)(address));
+    return { age, coordinates };
+});
+exports.fetchAdditionalInfo = fetchAdditionalInfo;

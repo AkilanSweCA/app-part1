@@ -9,22 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getcoordinates = void 0;
-require("dotenv").config();
-// Define the geocodeService function
-const getcoordinates = function getCoordinates(address) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            // Extract coordinates from the response
-            // Make a request to the geocoding API
-            const response = yield fetch(`${process.env.GEO_API}&q=${encodeURIComponent(address)}`);
-            const resp = yield response.json();
-            // Return the coordinates
-            return resp.length > 0 ? [resp[0].lat, resp[0].lon] : undefined;
-        }
-        catch (e) {
-            throw e;
-        }
-    });
-};
-exports.getcoordinates = getcoordinates;
+exports.searchhomeownerByParameters = exports.gethomeownerById = exports.gethomeowner = void 0;
+const homeowner_1 = require("../models/homeowner");
+const gethomeowner = () => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.find(); });
+exports.gethomeowner = gethomeowner;
+const gethomeownerById = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.findById(id); });
+exports.gethomeownerById = gethomeownerById;
+const searchhomeownerByParameters = (searchParams) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.find(searchParams); });
+exports.searchhomeownerByParameters = searchhomeownerByParameters;

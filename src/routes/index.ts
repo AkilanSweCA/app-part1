@@ -8,12 +8,8 @@ import {
   deleteHomeowners,
   deleteHomeownerById,
 } from "../controllers";
-
+import { asyncWrapper } from "../helpers/asyncWrapper";
 const router = express.Router();
-
-const asyncWrapper = (cb) => {
-  return (req, res, next) => cb(req, res, next).catch(next);
-};
 
 // POST /homeowners
 router.post("/api/homeowner", asyncWrapper(addHomeowner));

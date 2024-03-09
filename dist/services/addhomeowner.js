@@ -9,25 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchHomeOwnerByParametersService = exports.getHomeOwnerByIdService = exports.getHomeOwnerService = exports.addHomeOwnerService = void 0;
+exports.addhomeowner = void 0;
 const homeowner_1 = require("../models/homeowner");
-const utils_1 = require("../utils");
-const addHomeOwnerService = (req) => __awaiter(void 0, void 0, void 0, function* () {
+const addhomeowner = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // Check if homeowner already exists
     const filter = { fname: req.fname, lname: req.lname, dob: req.dob };
     const existingHomeowner = yield homeowner_1.Homeowner.findOne(filter);
     if (existingHomeowner) {
-        return utils_1.globalConstant.home_owner.already_exists;
+        return;
     }
     // Save homeowner information to MongoDB
     const homeowner = new homeowner_1.Homeowner(req);
     yield homeowner.save();
     return homeowner;
 });
-exports.addHomeOwnerService = addHomeOwnerService;
-const getHomeOwnerService = () => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.find(); });
-exports.getHomeOwnerService = getHomeOwnerService;
-const getHomeOwnerByIdService = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.findById(id); });
-exports.getHomeOwnerByIdService = getHomeOwnerByIdService;
-const searchHomeOwnerByParametersService = (searchParams) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.find(searchParams); });
-exports.searchHomeOwnerByParametersService = searchHomeOwnerByParametersService;
+exports.addhomeowner = addhomeowner;

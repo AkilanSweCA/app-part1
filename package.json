@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "nodemon src/app.ts",
+    "build": "tsc --build",
     "test": "set PORT=0&&jest --forceExit --detectOpenHandles  --runInBand  --testTimeout=10000 --no-cache --watchAll"
   },
   "devDependencies": {

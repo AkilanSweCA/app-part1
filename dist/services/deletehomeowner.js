@@ -9,22 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getcoordinates = void 0;
-require("dotenv").config();
-// Define the geocodeService function
-const getcoordinates = function getCoordinates(address) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            // Extract coordinates from the response
-            // Make a request to the geocoding API
-            const response = yield fetch(`${process.env.GEO_API}&q=${encodeURIComponent(address)}`);
-            const resp = yield response.json();
-            // Return the coordinates
-            return resp.length > 0 ? [resp[0].lat, resp[0].lon] : undefined;
-        }
-        catch (e) {
-            throw e;
-        }
-    });
-};
-exports.getcoordinates = getcoordinates;
+exports.deletehomeownerById = exports.deletehomeowners = void 0;
+const homeowner_1 = require("../models/homeowner");
+const deletehomeowners = (ids) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.deleteMany({ _id: { $in: ids } }); });
+exports.deletehomeowners = deletehomeowners;
+const deletehomeownerById = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield homeowner_1.Homeowner.findByIdAndDelete(id); });
+exports.deletehomeownerById = deletehomeownerById;

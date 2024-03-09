@@ -9,6 +9,6 @@ const HomeownerSchema = new mongoose_1.Schema({
     dob: Date,
     age: Number,
     address: String,
-    coordinates: { type: [Number], index: '2dsphere' }
+    coordinates: { type: [Number], index: "2dsphere" },
 });
-exports.Homeowner = (0, mongoose_1.model)('Homeowner', HomeownerSchema);
+exports.Homeowner = (0, mongoose_1.model)("Homeowner", HomeownerSchema);

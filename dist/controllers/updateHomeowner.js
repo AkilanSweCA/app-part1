@@ -9,33 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchHomeowners = exports.getHomeownerById = exports.getHomeowners = void 0;
+exports.updateHomeowner = void 0;
 const services_1 = require("../services");
 const utils_1 = require("../utils");
 const StatusCodes_1 = require("../enum/StatusCodes");
-const getHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.status(StatusCodes_1.StatusCodes.OK).json(yield (0, services_1.gethomeowner)());
-});
-exports.getHomeowners = getHomeowners;
-const getHomeownerById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const resp = yield (0, services_1.gethomeownerById)(req.params.id);
-    return resp
-        ? res.status(StatusCodes_1.StatusCodes.OK).json(resp)
-        : res
-            .status(StatusCodes_1.StatusCodes.NotFound)
-            .json(utils_1.globalConstant.home_owner.not_found);
-});
-exports.getHomeownerById = getHomeownerById;
-const searchHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const searchParams = req.query;
-    if (Object.keys(searchParams).length === 0) {
+const updateHomeowner = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Parse XML document
+    const obj = (0, utils_1.parseHomeownerRequest)(req);
+    if (!obj._id || !(0, utils_1.validateHomeownerUpdateReq)(obj)) {
         return res.sendStatus(StatusCodes_1.StatusCodes.BadRequest);
     }
-    const resp = yield (0, services_1.searchhomeownerByParameters)(searchParams);
-    return resp.length > 0
+    const additionalInfo = yield (0, services_1.fetchAdditionalInfo)(obj);
+    const resp = yield (0, services_1.updatehomeowner)(Object.assign(Object.assign({}, obj), additionalInfo));
+    return resp == null
         ? res.status(StatusCodes_1.StatusCodes.OK).json(resp)
         : res
             .status(StatusCodes_1.StatusCodes.NotFound)
             .json(utils_1.globalConstant.home_owner.not_found);
 });
-exports.searchHomeowners = searchHomeowners;
+exports.updateHomeowner = updateHomeowner;
