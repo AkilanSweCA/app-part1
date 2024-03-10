@@ -35,7 +35,7 @@ describe("DELETE /api/homeowners", () => {
     const res = await request(app)
       .delete("/api/homeowners")
       .set("Content-Type", "application/xml")
-      .send(mockDeleteHomeownerDetails(homeownerIds));
+      .send(mockDeleteHomeownerDetails(homeownerIds[1]));
 
     expect(res.statusCode).toBe(StatusCodes.OK);
     expect(res.body).toMatchObject(globalConstant.home_owner.deleted_all);
@@ -58,7 +58,7 @@ describe("DELETE /api/homeowners", () => {
     const res = await request(app)
       .delete("/api/homeowners")
       .set("Content-Type", "application/xml")
-      .send(mockDeleteHomeownerDetails(homeownerIds));
+      .send(mockDeleteHomeownerDetails(homeownerIds[0]));
 
     expect(res.statusCode).toBe(StatusCodes.NotFound);
     expect(res.body).toMatchObject(globalConstant.home_owner.not_found);

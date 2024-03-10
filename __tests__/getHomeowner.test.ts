@@ -12,7 +12,7 @@ let homeownerDataRef: { id: Types.ObjectId; fname: string };
 /* Connecting to the database before each test. */
 beforeAll(async () => {
   await dbconnect();
-  const homeownerData = await Homeowner.insertMany(mockdata);
+  const homeownerData = await Homeowner.insertMany(mockdata[0]);
   homeownerDataRef = {
     id: homeownerData[0]._id,
     fname: homeownerData[0].fname,

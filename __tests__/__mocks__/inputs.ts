@@ -3,7 +3,6 @@ import { Types } from "mongoose";
 export const mockdata = [
   { fname: "Akilan" + Math.random(), lname: "P", dob: "1990-07-26" },
   { fname: "Alex" + Math.random(), lname: "K", dob: "1980-07-25" },
-  { fname: "Jhon" + Math.random(), lname: "S", dob: "1970-07-29" },
 ];
 
 export const mockCreateHomeownerDetails = (fname: string) => `<homeowner>
@@ -40,7 +39,7 @@ export const mockUpdateHomeownerDetails = (
     <dob>1990-07-29</dob>        
 </homeowner>`;
 
-export const mockDeleteHomeownerDetails = (homeownerIds: Types.ObjectId[]) =>
+export const mockDeleteHomeownerDetails = (homeownerId: Types.ObjectId) =>
   `<homeowner>
-        <_id>${homeownerIds[1]}</_id>
+        <_id>${homeownerId}</_id>
     </homeowner>`;

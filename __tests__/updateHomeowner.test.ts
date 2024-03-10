@@ -12,7 +12,7 @@ let homeownerId: Types.ObjectId;
 /* Connecting to the database before each test. */
 beforeAll(async () => {
   await dbconnect();
-  const homeownerData = await Homeowner.insertMany(mockdata);
+  const homeownerData = await Homeowner.insertMany(mockdata[0]);
   homeownerId = homeownerData[0]._id;
 });
 
