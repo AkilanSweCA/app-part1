@@ -8,7 +8,8 @@ exports.globalConstant = Object.freeze({
         already_exists: { message: "Homeowner record already exists" },
         added: {},
         updated: {},
-        deleted: {},
-        deleted_all: {},
+        deleted: { message: "Homeowner record deleted successfully" },
+        deleted_all: { message: "All Homeowner records are deleted successfully" },
+        invalidReq: { message: "Invalid request" },
     }),
 });

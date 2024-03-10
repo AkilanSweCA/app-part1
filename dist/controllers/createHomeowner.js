@@ -15,9 +15,11 @@ const utils_1 = require("../utils");
 const StatusCodes_1 = require("../enum/StatusCodes");
 const createHomeowner = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Parse XML document
-    const obj = (0, utils_1.parseHomeownerRequest)(req);
+    const obj = req.body.homeowner;
     if ((0, utils_1.validateHomeownerCreateReq)(obj)) {
-        return res.sendStatus(400);
+        return res
+            .status(StatusCodes_1.StatusCodes.BadRequest)
+            .json(utils_1.globalConstant.home_owner.invalidReq);
     }
     const additionalInfo = yield (0, services_1.fetchadditionalinfo)(obj);
     const resp = yield (0, services_1.createhomeowner)(Object.assign(Object.assign({}, obj), additionalInfo));

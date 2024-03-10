@@ -11,7 +11,7 @@ require("dotenv").config();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(xmlParser());
+app.use(xmlParser({ trim: false, explicitArray: false }));
 
 // Connect to MongoDB
 dbconnect();
@@ -24,7 +24,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-/*
 process
   .on("unhandledRejection", (reason, p) => {
     console.error(reason, "Unhandled Rejection at Promise", p);
@@ -33,5 +32,5 @@ process
     console.error(err, "Uncaught Exception thrown");
     process.exit(1);
   });
-*/
+
 export default app;

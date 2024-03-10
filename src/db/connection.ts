@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-export const dbconnect = () => {
-  mongoose
+export const dbconnect = async () => {
+  await mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.error("Failed to connect to MongoDB", err));
 };
 
-export const dbclose = () => {
-  mongoose.connection.close();
+export const dbclose = async () => {
+  await mongoose.connection.close();
 };

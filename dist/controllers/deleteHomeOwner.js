@@ -15,10 +15,12 @@ const utils_1 = require("../utils");
 const StatusCodes_1 = require("../enum/StatusCodes");
 const deleteHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    if (!(((_a = req.body.homeowner) === null || _a === void 0 ? void 0 : _a.ids) && req.body.homeowner.ids.length > 0)) {
-        return res.sendStatus(StatusCodes_1.StatusCodes.BadRequest);
+    if (!(req.body.homeowner && ((_a = req.body.homeowner) === null || _a === void 0 ? void 0 : _a._id.length))) {
+        return res
+            .status(StatusCodes_1.StatusCodes.BadRequest)
+            .json(utils_1.globalConstant.home_owner.invalidReq);
     }
-    const resp = yield (0, services_1.deletehomeowners)(req.body.homeowner.ids[0].id);
+    const resp = yield (0, services_1.deletehomeowners)(req.body.homeowner._id);
     return resp.deletedCount > 0
         ? res.status(StatusCodes_1.StatusCodes.OK).json(utils_1.globalConstant.home_owner.deleted_all)
         : res
@@ -27,7 +29,7 @@ const deleteHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.deleteHomeowners = deleteHomeowners;
 const deleteHomeownerById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const resp = yield (0, services_1.deletehomeownerById)(req.params.id);
+    const resp = yield (0, services_1.deletehomeownerById)(req.params._id);
     return resp
         ? res.status(StatusCodes_1.StatusCodes.OK).json(utils_1.globalConstant.home_owner.deleted)
         : res

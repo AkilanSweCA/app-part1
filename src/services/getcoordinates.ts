@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 // Define the geocodeService function
-export const getcoordinates = async function getCoordinates(address) {
+export const getcoordinates = async function getCoordinates(address: string) {
   try {
     // Extract coordinates from the response
 

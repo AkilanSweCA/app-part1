@@ -18,7 +18,7 @@ const getHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.getHomeowners = getHomeowners;
 const getHomeownerById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const resp = yield (0, services_1.gethomeownerById)(req.params.id);
+    const resp = yield (0, services_1.gethomeownerById)(req.params._id);
     return resp
         ? res.status(StatusCodes_1.StatusCodes.OK).json(resp)
         : res
@@ -29,7 +29,9 @@ exports.getHomeownerById = getHomeownerById;
 const searchHomeowners = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const searchParams = req.query;
     if (Object.keys(searchParams).length === 0) {
-        return res.sendStatus(StatusCodes_1.StatusCodes.BadRequest);
+        return res
+            .status(StatusCodes_1.StatusCodes.BadRequest)
+            .json(utils_1.globalConstant.home_owner.invalidReq);
     }
     const resp = yield (0, services_1.searchhomeownerByParameters)(searchParams);
     return resp.length > 0

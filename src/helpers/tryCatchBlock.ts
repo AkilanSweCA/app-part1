@@ -1,6 +1,8 @@
-export default (fn, next) => {
+import { NextFunction } from "express";
+
+export default (fn: Function, next: NextFunction) => {
   try {
-    fn().catch((e) => {
+    fn().catch((e: Error) => {
       throw e;
     });
   } catch (e) {

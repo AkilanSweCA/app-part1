@@ -1,10 +1,14 @@
-import mongoose from "mongoose";
 import request from "supertest";
 import { Homeowner } from "../src/models/homeowner";
 import app from "../src/app";
 import { dbclose, dbconnect } from "../src/db/connection";
-
-require("dotenv").config();
+import { globalConstant } from "../src/utils";
+import {
+  mockCreateHomeownerDetails,
+  mockCreateMissingHomeownerDetails,
+  mockCreateInvalidDobHomeownerDetails,
+} from "./__mocks__/inputs";
+import { StatusCodes } from "../src/enum/StatusCodes";
 
 const fname = "Akilan" + Math.random();
 
@@ -24,61 +28,47 @@ describe("Add Homeowner", () => {
     it("should add homeowner", async () => {
       const res = await request(app)
         .post("/api/homeowner")
-        .set("Content-Type", "application/xml").send(`
-    <homeowner>
-        <fname>${fname}</fname>
-        <lname>P</lname>
-        <dob>1990-07-26</dob>
-        <address>1106 jalna blvd</address>
-    </homeowner>`);
-      expect(res.statusCode).toBe(201);
-      expect(res.body.fname).toBe(fname);
-      expect(res.body).toMatchObject({
-        fname: fname,
-      });
+        .set("Content-Type", "application/xml")
+        .send(mockCreateHomeownerDetails(fname));
+
+      expect(res.statusCode).toBe(StatusCodes.Created);
+      expect(res.body).toMatchObject({ fname: fname });
     });
   });
+});
 
-  describe("POST /api/homeowner", () => {
-    it("should not add if already exists", async () => {
-      const res = await request(app)
-        .post("/api/homeowner")
-        .set("Content-Type", "application/xml").send(`
-        <homeowner>
-            <fname>${fname}</fname>
-            <lname>P</lname>
-            <dob>1990-07-26</dob>
-            <address>1106 jalna blvd</address>
-        </homeowner>`);
-      expect(res.statusCode).toBe(400);
-    });
+describe("POST /api/homeowner", () => {
+  it("should not add if already exists", async () => {
+    const res = await request(app)
+      .post("/api/homeowner")
+      .set("Content-Type", "application/xml")
+      .send(mockCreateHomeownerDetails(fname));
+
+    expect(res.statusCode).toBe(StatusCodes.BadRequest);
+    expect(res.body).toMatchObject(globalConstant.home_owner.already_exists);
   });
+});
 
-  describe("POST /api/homeowner", () => {
-    it("should block data process if any missing details", async () => {
-      const res = await request(app)
-        .post("/api/homeowner")
-        .set("Content-Type", "application/xml").send(`
-    <homeowner>
-        <fname>${fname}</fname>
-        <lname>P</lname>
-    </homeowner>`);
-      expect(res.statusCode).toBe(400);
-    });
+describe("POST /api/homeowner", () => {
+  it("should block data process if any missing details", async () => {
+    const res = await request(app)
+      .post("/api/homeowner")
+      .set("Content-Type", "application/xml")
+      .send(mockCreateMissingHomeownerDetails);
+
+    expect(res.statusCode).toBe(StatusCodes.BadRequest);
+    expect(res.body).toMatchObject(globalConstant.home_owner.invalidReq);
   });
+});
 
-  describe("POST /api/homeowners", () => {
-    it("should block if date of birth is invalid", async () => {
-      const res = await request(app)
-        .post("/api/homeowner")
-        .set("Content-Type", "application/xml").send(`
-        <homeowner>
-            <fname>${fname}</fname>
-            <lname>P</lname>
-            <dob>1990-07-50</dob>
-            <address>1106 jalna blvd</address>
-        </homeowner>`);
-      expect(res.statusCode).toBe(400);
-    });
+describe("POST /api/homeowners", () => {
+  it("should block if date of birth is invalid", async () => {
+    const res = await request(app)
+      .post("/api/homeowner")
+      .set("Content-Type", "application/xml")
+      .send(mockCreateInvalidDobHomeownerDetails(fname));
+
+    expect(res.statusCode).toBe(StatusCodes.BadRequest);
+    expect(res.body).toMatchObject(globalConstant.home_owner.invalidReq);
   });
 });

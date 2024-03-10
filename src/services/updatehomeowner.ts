@@ -1,8 +1,8 @@
-import { ICreateHomeownerRequest, IHomeowner } from "../interfaces";
+import { ICreateHomeownerModel, IHomeowner } from "../interfaces";
 import { Homeowner } from "../models/homeowner";
 import { HydratedDocument } from "mongoose";
 
-export const updatehomeowner = async (req: ICreateHomeownerRequest) => {
+export const updatehomeowner = async (req: ICreateHomeownerModel) => {
   // Check if homeowner already exists
   const existingHomeowner = await Homeowner.findById(req._id);
   if (!existingHomeowner) {

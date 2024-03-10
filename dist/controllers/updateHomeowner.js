@@ -15,13 +15,15 @@ const utils_1 = require("../utils");
 const StatusCodes_1 = require("../enum/StatusCodes");
 const updateHomeowner = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Parse XML document
-    const obj = (0, utils_1.parseHomeownerRequest)(req);
-    if (!obj._id || !(0, utils_1.validateHomeownerUpdateReq)(obj)) {
-        return res.sendStatus(StatusCodes_1.StatusCodes.BadRequest);
+    const obj = req.body.homeowner;
+    if (!(0, utils_1.validateHomeownerUpdateReq)(obj)) {
+        return res
+            .status(StatusCodes_1.StatusCodes.BadRequest)
+            .json(utils_1.globalConstant.home_owner.invalidReq);
     }
     const additionalInfo = yield (0, services_1.fetchadditionalinfo)(obj);
     const resp = yield (0, services_1.updatehomeowner)(Object.assign(Object.assign({}, obj), additionalInfo));
-    return resp == null
+    return resp
         ? res.status(StatusCodes_1.StatusCodes.OK).json(resp)
         : res
             .status(StatusCodes_1.StatusCodes.NotFound)

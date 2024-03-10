@@ -32,7 +32,7 @@ router.post("/api/homeowner", (0, asyncWrapper_1.asyncWrapper)(controllers_1.cre
 // GET /homeowners
 router.get("/api/homeowners", (0, asyncWrapper_1.asyncWrapper)(controllers_1.getHomeowners));
 // GET /homeowners/:id
-router.get("/api/homeowner/:id", (0, asyncWrapper_1.asyncWrapper)(controllers_1.getHomeownerById));
+router.get("/api/homeowner/:_id", (0, asyncWrapper_1.asyncWrapper)(controllers_1.getHomeownerById));
 // GET /homeowners/param/search?fname=value&lname=value
 router.get("/api/homeowners/param/search", (0, asyncWrapper_1.asyncWrapper)(controllers_1.searchHomeowners));
 // PUT /homeowners
@@ -40,5 +40,5 @@ router.put("/api/homeowner", (0, asyncWrapper_1.asyncWrapper)(controllers_1.upda
 // DELETE /homeowners
 router.delete("/api/homeowners", (0, asyncWrapper_1.asyncWrapper)(controllers_1.deleteHomeowners));
 // DELETE /homeowners/:id
-router.delete("/api/homeowner/:id", (0, asyncWrapper_1.asyncWrapper)(controllers_1.deleteHomeownerById));
+router.delete("/api/homeowner/:_id", (0, asyncWrapper_1.asyncWrapper)(controllers_1.deleteHomeownerById));
 exports.default = router;

@@ -6,6 +6,7 @@ import {
 } from "../services";
 import { globalConstant } from "../utils";
 import { StatusCodes } from "../enum/StatusCodes";
+import { ISearchHomeowner } from "../interfaces";
 
 export const getHomeowners = async (
   req: express.Request,
@@ -18,7 +19,7 @@ export const getHomeownerById = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const resp = await gethomeownerById(req.params.id);
+  const resp = await gethomeownerById(req.params._id);
   return resp
     ? res.status(StatusCodes.OK).json(resp)
     : res
@@ -30,10 +31,12 @@ export const searchHomeowners = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const searchParams = req.query;
+  const searchParams = req.query as Partial<ISearchHomeowner>;
 
   if (Object.keys(searchParams).length === 0) {
-    return res.sendStatus(StatusCodes.BadRequest);
+    return res
+      .status(StatusCodes.BadRequest)
+      .json(globalConstant.home_owner.invalidReq);
   }
 
   const resp = await searchhomeownerByParameters(searchParams);

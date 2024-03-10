@@ -6,5 +6,5 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  res.status(500).send({ errors: [{ message: "Something went wrong" }] });
+  res.status(500).send({ errors: [{ message: err.stack }] });
 };
